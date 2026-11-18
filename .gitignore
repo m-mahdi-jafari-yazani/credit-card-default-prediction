@@ -1,4 +1,9 @@
+# Virtual environment
 .venv/
+
+# Data (not tracked; reproduced from source)
 data/raw/*
 !data/raw/.gitkeep
+
+# OS files
 .DS_Store
