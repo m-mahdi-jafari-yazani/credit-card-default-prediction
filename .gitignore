@@ -1,6 +1,11 @@
 # Virtual environment
 .venv/
 
+# Python and Jupyter artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
 # Data (not tracked; reproduced from source)
 data/raw/*
 !data/raw/.gitkeep
