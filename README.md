@@ -49,6 +49,10 @@ jupyter notebook
 
 In VS Code, select `.venv/bin/python` as the notebook kernel.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the commit message format and the collaboration workflow.
+
 ## Authors
 
 - Mohammadmahdi Jafari Yazani
