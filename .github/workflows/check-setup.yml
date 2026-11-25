@@ -1,0 +1,36 @@
+name: Check setup
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check-setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run make all
+        run: make all PYTHON=python
+
+      - name: Check that the dataset loads
+        run: |
+          .venv/bin/python - <<'PY'
+          import pandas as pd
+
+          df = pd.read_excel(
+              "data/raw/default_of_credit_card_clients.xls",
+              header=1,
+              engine="calamine",
+          )
+          assert df.shape == (30000, 25), f"Unexpected shape: {df.shape}"
+          print("OK: dataset loaded with shape", df.shape)
+          PY
