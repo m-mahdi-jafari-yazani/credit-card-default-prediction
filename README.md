@@ -49,6 +49,11 @@ jupyter notebook
 
 In VS Code, select `.venv/bin/python` as the notebook kernel.
 
+## Authors
+
+- Mohammadmahdi Jafari Yazani
+- Helia Sadeghi
+
 ## License
 
 The code in this repository is released under the [MIT License](LICENSE).
