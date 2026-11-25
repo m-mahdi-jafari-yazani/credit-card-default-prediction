@@ -1,0 +1,29 @@
+name: Check PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check pull request title format
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          pattern='^(feat|fix|refactor|docs|test|chore)(\([a-z0-9_-]+\))?: [^[:space:]].*$'
+          if printf '%s\n' "$PR_TITLE" | grep -Eq "$pattern"; then
+            echo "OK: the pull request title follows the commit message format."
+          else
+            echo "Invalid pull request title: $PR_TITLE"
+            echo
+            echo "Expected format: type(scope): short description"
+            echo "Types: feat, fix, refactor, docs, test, chore. The scope is optional."
+            echo "Examples: docs: add license section to README"
+            echo "          feat(data): add data cleaning notebook"
+            exit 1
+          fi
