@@ -49,6 +49,22 @@ jupyter notebook
 
 In VS Code, select `.venv/bin/python` as the notebook kernel.
 
+## Project structure
+
+```
+.
+├── .github/workflows/   # Automated checks for pull requests
+├── data/raw/            # Raw dataset (downloaded by `make data`, not tracked)
+├── docs/                # Project documentation
+├── notebooks/           # Jupyter notebooks, numbered in execution order
+├── src/                 # Python code (dataset download script)
+├── CONTRIBUTING.md      # Commit message format and collaboration workflow
+├── LICENSE
+├── Makefile             # Environment and data setup
+├── README.md
+└── requirements.txt     # Pinned Python dependencies
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the commit message format and the collaboration workflow.
