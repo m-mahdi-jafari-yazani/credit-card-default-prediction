@@ -1,0 +1,57 @@
+name: Check English only
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check-english-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check tracked files and pull request title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          import subprocess
+          import sys
+
+          # Arabic-script block (covers Persian letters and digits) and the zero-width non-joiner.
+          pattern = re.compile(r"[\u0600-\u06ff\u200c]")
+          failed = False
+
+          title = os.environ.get("PR_TITLE", "")
+          if pattern.search(title):
+              failed = True
+              print("Pull request title contains Persian/Arabic-script characters.")
+
+          raw = subprocess.run(["git", "ls-files", "-z"], capture_output=True, check=True).stdout
+          for path in raw.decode("utf-8").split("\0"):
+              if not path:
+                  continue
+              try:
+                  with open(path, encoding="utf-8") as file:
+                      lines = file.read().splitlines()
+              except (UnicodeDecodeError, OSError):
+                  continue  # binary or unreadable file
+              for number, line in enumerate(lines, 1):
+                  if pattern.search(line):
+                      failed = True
+                      print(f"{path}:{number}: {line.strip()[:100]}")
+
+          if failed:
+              print("\nEverything in the repository must be in English.")
+              sys.exit(1)
+          print("OK: everything is in English.")
+          PY
