@@ -49,6 +49,12 @@ jupyter notebook
 
 In VS Code, select `.venv/bin/python` as the notebook kernel.
 
+## License
+
+The code in this repository is released under the [MIT License](LICENSE).
+
+The dataset is provided by the UCI Machine Learning Repository under the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license and is not included in this repository.
+
 ## Status
 
 Work in progress.
