@@ -8,6 +8,8 @@ The project uses the [Default of Credit Card Clients](https://archive.ics.uci.ed
 
 The raw data is not tracked in this repository. It is downloaded automatically (see Setup below).
 
+See [docs/dataset.md](docs/dataset.md) for the variable descriptions, value codes and findings about the data.
+
 ## Setup
 
 Requirements: Python 3.12 and GNU Make.
