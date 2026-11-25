@@ -30,11 +30,11 @@ It is safe to run repeatedly: steps that are already done are skipped.
 
 Other targets:
 
-| Command      | Description                                  |
-| ------------ | -------------------------------------------- |
-| `make help`  | List the available targets                   |
+| Command      | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `make help`  | List the available targets                               |
 | `make setup` | Create the virtual environment and install packages only |
-| `make data`  | Download the dataset only                    |
+| `make data`  | Download the dataset only                                |
 
 If Python 3.12 is installed under another name, pass it explicitly, for example `make all PYTHON=/path/to/python3.12`.
 
